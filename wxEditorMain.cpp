@@ -54,7 +54,7 @@ BEGIN_EVENT_TABLE(wxEditorFrame, wxFrame)
     EVT_CLOSE(wxEditorFrame::OnClose)
     EVT_MENU(idMenuQuit, wxEditorFrame::OnQuit)
     EVT_MENU(idMenuAbout, wxEditorFrame::OnAbout)
-    EVT_MENU(idMenuOpen, wxEditorFrame::OnOpen)
+    EVT_MENU(idMenuOpen, wxEditorFrame::OnOpen) //FIX THIS LINE
     EVT_TEXT(idMenuAbout, wxEditorFrame::OnAbout)
     EVT_TEXT_ENTER(idMenuAbout, wxEditorFrame::OnAbout)
     EVT_TEXT_MAXLEN(idMenuAbout, wxEditorFrame::OnAbout)
