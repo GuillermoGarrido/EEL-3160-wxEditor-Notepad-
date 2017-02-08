@@ -54,7 +54,7 @@ BEGIN_EVENT_TABLE(wxEditorFrame, wxFrame)
     EVT_CLOSE(wxEditorFrame::OnClose)
     EVT_MENU(idMenuQuit, wxEditorFrame::OnQuit)
     EVT_MENU(idMenuAbout, wxEditorFrame::OnAbout)
-    EVT_MENU(idMenuOpen, wxEditorFrame::OnOpen) //FIX THIS LINE
+    EVT_MENU(idMenuOpen, wxEditorFrame::OnOpen)
     EVT_TEXT(idMenuAbout, wxEditorFrame::OnAbout)
     EVT_TEXT_ENTER(idMenuAbout, wxEditorFrame::OnAbout)
     EVT_TEXT_MAXLEN(idMenuAbout, wxEditorFrame::OnAbout)
@@ -67,10 +67,11 @@ wxEditorFrame::wxEditorFrame(wxFrame *frame, const wxString& title)
 {
 #if wxUSE_MENUS
     // create a menu bar
+
     wxMenuBar* mbar = new wxMenuBar();
     wxMenu* fileMenu = new wxMenu(_T(""));
-    fileMenu->Append(idMenuOpen, _("&Open\tAlt-F5"), _("Open a file"));
-    mbar->Append(FileOpen, _("&Open"));
+    fileMenu->Append(idMenuOpen, _("&Open\tAlt-F4"), _("Open a file"));
+    mbar->Append(fileMenu, _("&Open"));
     fileMenu->Append(idMenuQuit, _("&Quit\tAlt-F4"), _("Quit the application"));
     mbar->Append(fileMenu, _("&File"));
 
@@ -124,8 +125,8 @@ void wxEditorFrame::OnOpen(wxCommandEvent &event)
     wxT("Text files (*txt)|*.txt|C++ Files (*.cpp)|*.cpp|Header Files (*.h)|.h"), wxFD_OPEN);
 
     int response = openDialog->ShowModal(); //get response from the dialog
-    if(response == wxID_OK)
+   /* if(response == wxID_OK)
     { //if response is okay, then load contents into textControl
         this->textControl->LoadFile(openDialog->GetPath());
-    }
+    }*/
 }
