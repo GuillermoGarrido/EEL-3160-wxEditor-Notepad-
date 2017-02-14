@@ -27,14 +27,14 @@ class wxEditorFrame: public wxFrame
             idMenuQuit = 1000,
             idMenuAbout,
             ID_TextBox,
-            idMenuOpen,
-            idMenuSave//Not part of the original program
+            idMenuOpen, //Included in version PW4
+            idMenuSave //Not part of the original program, included in version PW5
         };
         void OnClose(wxCloseEvent& event);
         void OnQuit(wxCommandEvent& event);
         void OnAbout(wxCommandEvent& event);
-        void OnOpen (wxCommandEvent& event);
-        void OnSave (wxCommandEvent& event); //Not part of original program
+        void OnOpen (wxCommandEvent& event); //Included in version PW4
+        void OnSave (wxCommandEvent& event); //Not part of original program, included in version PW5
         DECLARE_EVENT_TABLE()
 };
 
