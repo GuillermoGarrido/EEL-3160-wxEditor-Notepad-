@@ -23,7 +23,7 @@ wxTextCtrl* textControl;
 wxFileDialog* openDialog;
 //helper functions
 enum wxbuildinfoformat {
-    short_f = 1000, long_f, ID_TextBox, id_MenuOpen };
+    short_f = 1000, long_f, ID_TextBox, id_MenuOpen, id_MenuSave };
 
 
 wxString wxbuildinfo(wxbuildinfoformat format)
@@ -55,10 +55,10 @@ BEGIN_EVENT_TABLE(wxEditorFrame, wxFrame)
     EVT_MENU(idMenuQuit, wxEditorFrame::OnQuit)
     EVT_MENU(idMenuAbout, wxEditorFrame::OnAbout)
     EVT_MENU(idMenuOpen, wxEditorFrame::OnOpen)
+    EVT_MENU(idMenuSave, wxEditorFrame::OnSave)
     EVT_TEXT(idMenuAbout, wxEditorFrame::OnAbout)
     EVT_TEXT_ENTER(idMenuAbout, wxEditorFrame::OnAbout)
     EVT_TEXT_MAXLEN(idMenuAbout, wxEditorFrame::OnAbout)
-
 END_EVENT_TABLE()
 
 wxEditorFrame::wxEditorFrame(wxFrame *frame, const wxString& title)
@@ -70,9 +70,11 @@ wxEditorFrame::wxEditorFrame(wxFrame *frame, const wxString& title)
 
     wxMenuBar* mbar = new wxMenuBar();
     wxMenu* fileMenu = new wxMenu(_T(""));
-    fileMenu->Append(idMenuOpen, _("&Open\tAlt-F4"), _("Open a file"));
+    fileMenu->Append(idMenuOpen, _("&Open\tAlt-F3"), _("Open a file"));
     mbar->Append(fileMenu, _("&Open"));
-    fileMenu->Append(idMenuQuit, _("&Quit\tAlt-F4"), _("Quit the application"));
+       fileMenu->Append(idMenuSave, _("&Save\tAlt-F4"), _("Save a file"));
+    mbar->Append(fileMenu, _("&Save"));
+    fileMenu->Append(idMenuQuit, _("&Quit\tAlt-F5"), _("Quit the application"));
     mbar->Append(fileMenu, _("&File"));
 
     wxMenu* helpMenu = new wxMenu(_T(""));
@@ -125,8 +127,20 @@ void wxEditorFrame::OnOpen(wxCommandEvent &event)
     wxT("Text files (*txt)|*.txt|C++ Files (*.cpp)|*.cpp|Header Files (*.h)|.h"), wxFD_OPEN);
 
     int response = openDialog->ShowModal(); //get response from the dialog
-   /* if(response == wxID_OK)
-    { //if response is okay, then load contents into textControl
+    /*if(response == wxID_OK)
+    { //if response is ok, then load contents into textControl
         this->textControl->LoadFile(openDialog->GetPath());
+    }*/
+}
+
+void wxEditorFrame::OnSave(wxCommandEvent &event)
+{
+    wxFileDialog *openDialog = new wxFileDialog(this, wxT("Choose a file"), wxT(""), wxT(""),
+    wxT("Text files (*txt)|*.txt|C++ Files (*.cpp)|*.cpp|Header Files (*.h)|.h"), wxFD_SAVE);
+
+    int response = openDialog->ShowModal(); //get response from the dialog
+    /*if(response == wxID_OK)
+    { //if response is ok, then save contents into textControl
+        this->textControl->SaveFile(openDialog->GetPath());
     }*/
 }
